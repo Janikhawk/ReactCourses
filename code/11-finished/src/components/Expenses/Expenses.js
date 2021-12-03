@@ -3,22 +3,18 @@ import React, { useState } from 'react';
 import ExpenseItem from './ExpenseItem';
 import Card from '../UI/Card';
 import './Expenses.css';
-import ExpensesFilter from './ExpensesFilter/ExpensesFilter';
+import ExpensesFilter from './ExpensesFilter';
 
 const Expenses = (props) => {
-  const [expenseItemMap, setExpenseItem] = useState(
+  const [expenseItemMap] = useState(
   {
     expenseMap: props.items,
     yearArray: Object.keys(props.items),
-    selectedYear:  Object.keys(props.items)[0]
   });
 
 
   const selectChangeHandler = (event) => {
-    setExpenseItem({
-      ...expenseItemMap,
-      selectedYear: event
-    });
+    props.onSelectChange(event);
   }
 
   return (
@@ -29,7 +25,7 @@ const Expenses = (props) => {
         />
       <Card >
         {
-          expenseItemMap.expenseMap[expenseItemMap.selectedYear].map(propItem => 
+          expenseItemMap.expenseMap[props.selectedYear].map(propItem => 
             <ExpenseItem
               key = {propItem.title}
               title={propItem.title}
