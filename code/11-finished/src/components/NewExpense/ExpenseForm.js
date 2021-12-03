@@ -12,6 +12,9 @@ const ExpenseForm = (props) => {
     const changeByKey = (event, key) => {
         setUserInput((prevState) => {
             let value = event.target.value;
+            if (key === 'amount') {
+                value = +value;
+            }
             return {...prevState, [key]: value}
         })
     }
